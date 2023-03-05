@@ -1,5 +1,7 @@
 package main
 
+// #1306 https://leetcode.com/problems/jump-game-iii/
+
 func CanReach(arr []int, start int) bool {
 	n := len(arr)
 	queue := []int{start}

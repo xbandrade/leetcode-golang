@@ -2,6 +2,21 @@ package main
 
 import "fmt"
 
+func MaxSlice(slice []int) int {
+	currMax := slice[0]
+	for _, num := range slice {
+		currMax = Max(currMax, num)
+	}
+	return currMax
+}
+
+func Min(a int, b int) int {
+	if a <= b {
+		return a
+	}
+	return b
+}
+
 func Max(a int, b int) int {
 	if a >= b {
 		return a
@@ -42,6 +57,17 @@ func TestInt(myFunc func(nums []int) int, numsList [][]int, answers []int) {
 	}
 }
 
+func TestInt2(myFunc func(nums []int, d int) int, numsList [][]int, ds []int, answers []int) {
+	for i, nums := range numsList {
+		result := myFunc(nums, ds[i])
+		if result == answers[i] {
+			fmt.Printf("Test case %d - Pass\n", i)
+		} else {
+			fmt.Printf("Test case %d - Fail\n", i)
+		}
+	}
+}
+
 func main() {
 	fmt.Println("Jump Game 1:")
 	numsList1 := [][]int{{2, 3, 1, 1, 4}}
@@ -72,4 +98,12 @@ func main() {
 	numsList4 = append(numsList4, []int{7, 6, 9, 6, 9, 6, 9, 7})
 	answers4 := []int{3, 0, 1}
 	TestInt(MinJumps, numsList4, answers4)
+
+	fmt.Println("Jump Game 5:")
+	numsList5 := [][]int{{6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12}}
+	numsList5 = append(numsList5, []int{3, 3, 3, 3, 3})
+	numsList5 = append(numsList5, []int{7, 6, 5, 4, 3, 2, 1})
+	ds5 := []int{2, 3, 1}
+	answers5 := []int{4, 1, 7}
+	TestInt2(MaxJumps, numsList5, ds5, answers5)
 }
